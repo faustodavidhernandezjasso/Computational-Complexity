@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage[spanish]{babel}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\renewcommand{\footrulewidth}{0.8 pt}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
+
+\pagestyle{fancy}
+
+
+
+\newenvironment{problem}[2][Problem]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+
+\newenvironment{solution}{\textbf{Solution}}
+
+
+\lhead{Fausto David Hernández Jasso}
+\rhead{Complejidad Computacional} 
+\chead{\textbf{}}
+\rfoot{Facultad de Ciencias, UNAM}
+
+\newtheorem{theorem}{Teorema}[section]
+\begin{document}
+\input{coverPage}
+\section{Relación}
+\noindent
+\(\mathbf{P} \subseteq \mathbf{NP}\), es decir, todo problema resuelto por un algoritmo determinista en \textbf{tiempo polinomial}, también 
+puede ser resulto por un algoritmo no-determinista en \textbf{tiempo polinomial}, ésto se cumple ya que el \textbf{determinismo}
+es un caso particular del \textbf{no-determinismo}. La formalización del enunciado anterior es la siguiente:
+\newline 
+Recordemos que un \textbf{algoritmo no-determinista} cuenta con dos fases:
+\begin{itemize}
+    \item Fase adivinadora.
+    \item Fase verificadora.
+\end{itemize}
+Entonces sea \(\Pi\) un problema en la clase \(\mathbf{P}\), y sea \(A\) un \textbf{algoritmo determinista} que resuelve a \(\Pi\) en tiempo 
+polinomial, entonces construimos un \textbf{algoritmo no-determinista} para \(\Pi\) de la siguiente manera:
+\newline 
+Utilizamos a \(A\) como la fase verificadora del \textbf{algoritmo no-determinista} e ignoramos la fase adivinadora. Así \(\Pi \in \mathbf{NP}\).
+\newline 
+A pesar de que es sencillo convertir un \textbf{algoritmo determinista} en un \textbf{algoritmo no-determinista}, lo inverso no lo es,
+de hecho no se conoce un método general para convertir un \textbf{algoritmo no-determinista} en tiempo polinomial en un 
+\textbf{algoritmo determinista} en tiempo polinomial. De hecho lo único que podemos garantizar es lo siguiente:
+\begin{theorem}
+    Si \(\Pi \in \mathbf{NP}\), entonces existe un polinomio \(p\) tal que \(\Pi\) puede ser resulto por un \textbf{algoritmo determinista}
+    de complejidad \(O\left(2^{p(n)}\right)\)
+\end{theorem}
+\begin{proof}
+    Sea \(\Pi\) un problema tal que \(\Pi\) pertenece a la calse \(\mathbf{NP}\), entonces por definición existe un \textbf{algoritmo no determinista} \(A\)
+    que resuelve a \(\Pi\) en \textbf{tiempo polinomial}. Ahora sea \(q(n)\) una cota polinomial superior para la \textbf{complejidad en tiempo} de \(A\).
+    Sin pérdida de generalidad asumiremos que \(q(n)\) puede ser evaluado en \textbf{tiempo polinomial} ya que podemos tomar a \(q(n) = c_{1}n^{c_{2}}\) con 
+    \(c_{1}, c_{2} \in \mathbb{Z}^{+}\) lo suficientemente grandes para que \(q(n)\) acoten superiormente la \textbf{complejidad en tiempo} de \(A\).
+    Recordemos que resolver cualquier problema puede ser visto como un problema de reconocimiento de lenguaje, la transformación del primero al último 
+    se hace de la siguiente forma \textit{(no entraremos en muchos detalles)}:
+    \begin{itemize}
+        \item Codificar el ejemplar del problema en un \textbf{esquema de codificación estándar}.
+        \item Determinar sí dicha cadena pertenece al lenguaje dado por el problema.
+    \end{itemize}
+    Es fácil ver que sí tenemos un algoritmo \(A\) para resolver a \(\Pi\) entonces el problema de \textbf{reconocimiento de lenguaje} asociado 
+    a \(\Pi\) se puede diseñar una \textbf{máquina de Turing} que reconozca dicho lenguaje. En éste contexto como \(A\) es un algoritmo no determinista, 
+    entonces la \textbf{Máquina de Turing} que reconoce al lenguaje asociado a \(\Pi\) es también \textbf{no-determinista}, recordemos su especificación:
+    \begin{itemize}
+        \item Un conjunto finito de símbolos \(\varGamma\).
+        \item Un conjunto finito de símbolos de entrada \(\Sigma\), tal que \(\Sigma \subset \varGamma\).
+        \item Un símbolo especial \(b \in \varGamma\), llamado blanco.
+        \item Un conjunto finito de estados \(Q\), un estado inicial \(q_{0}\) y dos estados de paro: \(q_{0}\) y \(q_{N}\).
+        \item Una función de transición \(d \ : \ \left(Q \setminus \{q_{0}, q_{N}\} \right) \times \varGamma \longrightarrow Q \times \varGamma \times \{-1, +1\}\)
+    \end{itemize}
+    Recordemos que la \textbf{Máquina de Turing No-Determinista} utiliza su ``módulo adivinador`` que se encarga 
+    de formar cadenas arbitrarias que pertenecen \(\varGamma^{\star}\) y después se hace la verificación sí dicha 
+    cadena formada por el ``módulo adivinador`` es aceptada. 
+    \newline 
+    Por la explicación anterior sabemos que para toda entrada \(i\) de longitud \(n\), entonces debe de existir una
+    cadena \(s_{i}\) de longitud a lo más \(q(n)\) formada por el ``módulo adivinador`` que es reconocida por la fase 
+    verificadora de \(A\) y ésta verificación no tomará más de \(q(n)\) \textit{(ya que \(q(n)\) es cota de la 
+    complejidad en tiempo)}. Por la definición de la \textbf{Máquina de Turing No-Determinista} sabemos que las 
+    cadenas formadas por su ``módulo adivinador`` pertenecen \(\varGamma^{\star}\), por lo tanto para una cadena
+    de longitud a lo más \(q\left(n\right)\) debemos considerar a lo más \(|\varGamma|^{q\left(n\right)}\), ya que 
+    en el peor de los casos tenemos que \(|\varGamma| = n\), las cadenas que tengan longitud menor que \(q\left(n\right)\) 
+    trivialmente las podemos hacer de longitud igual a \(q\left(n\right)\), agregándosles el símbolo blanco \(b\). 
+    Ahora podemos determinar de manera \textbf{determinista} cuando \(A\) acepta una entrada de longitud \(n\), simplemente 
+    aplicamos la fase verificadora de \(A\) hasta que se detenga en los \(q(n)\) pasos 
+    o haga \(q(n)\) pasos de cada una de las \(|\varGamma|^{q(n)}\) posibles cadenas. La entrada es aceptada sí en alguna de 
+    las cadenas formadas por el módulo ``adivinador`` lleva a un cómputo aceptado dentro de la cota de tiempo en otro caso 
+    no es aceptada. Así hemos formado un algoritmo determinista ya que explícitamente hemos considerado todas las cadenas posibles
+    y entre ellas vamos probando todas a ver cuál es aceptada sí es que existe alguna que es aceptada. Sin embargo la complejidad 
+    de éste algoritmo determinista está dada por \(O\left(q(n) \cdot |\varGamma|^{q(n)}\right)\) ya que cada cadena tiene longitud a lo más 
+    \(q(n)\) y existen a los más \(|\varGamma|^{q(n)}\) sin embargo eligiendo un polinomio \(p(n)\) adecuado resulta que
+    \(O\left(q(n) \cdot |\varGamma|^{q(n)}\right) \subset O\left(2^{p(n)}\right)\) lo que implica que el 
+    \textbf{algoritmo determinista} tenga complejidad \(O\left(2^{p(n)}\right)\).
+\end{proof}
+\end{document}

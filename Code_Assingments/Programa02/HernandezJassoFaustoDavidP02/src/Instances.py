@@ -1,0 +1,101 @@
+import SetCoverProblem as SCP
+
+
+# Ejemplar 1
+finite_set_1 = frozenset([x for x in range(1, 13)])
+S1 = SCP.Set("S1", [x for x in range(1,7)])
+S2 = SCP.Set("S2", [5,6,8,9])
+S3 = SCP.Set("S3", [1,4,7,10])
+S4 = SCP.Set("S4", [2,5,7,8,11])
+S5 = SCP.Set("S5", [3,6,9,12])
+S6 = SCP.Set("S6", [10,11])
+family1 = {S1, S2, S3, S4, S5, S6}
+instance1 = SCP.SetCover(finite_set_1, family1)
+
+# Ejemplar 2
+finite_set_2 = frozenset([x for x in range(1, 13)])
+Z1 = SCP.Set("Z1", [x for x in range(1,5)])
+Z2 = SCP.Set("Z2", [2, 3, 6, 7, 10, 11])
+Z3 = SCP.Set("Z3", [4, 8, 12])
+Z4 = SCP.Set("Z4", [5,6,7,8,9])
+Z5 = SCP.Set("Z5", [9, 10, 11, 12])
+family2 = {Z1, Z2, Z3, Z4, Z5}
+instance2 = SCP.SetCover(finite_set_2, family2)
+
+# Ejemplar 3
+finite_set_3 = frozenset([x for x in range(1, 10)])
+T1 = SCP.Set("T1", [x for x in range(1,7)])
+T2 = SCP.Set("T2", [1, 2, 4, 5, 7])
+T3 = SCP.Set("T3", [5, 6, 8, 9])
+T4 = SCP.Set("T4", [6, 9])
+family3 = {T1, T2, T3, T4}
+instance3 = SCP.SetCover(finite_set_3, family3)
+
+# Ejemplar 4
+finite_set_4 = frozenset([x for x in range(1, 13)])
+P1 = SCP.Set("P1", [x for x in range(1,9)])
+P2 = SCP.Set("P2", [x for x in range(1,7)])
+P3 = SCP.Set("P3", [7, 8, 12])
+P4 = SCP.Set("P4", [9, 10])
+P5 = SCP.Set("P5", [10, 11, 12])
+family4 = {P1, P2, P3, P4, P5}
+instance4 = SCP.SetCover(finite_set_4, family4)
+
+#Ejemplar 5
+finite_set_5 = frozenset([x for x in range(1, 13)])
+H1 = SCP.Set("H1", [1, 4])
+H2 = SCP.Set("H2", [2, 5])
+H3 = SCP.Set("H3", [3, 6])
+H4 = SCP.Set("H4", [1, 2, 3, 4, 6, 7, 9])
+H5 = SCP.Set("H5", [4, 5, 7, 8])
+H6 = SCP.Set("H6", [6, 11])
+H7 = SCP.Set("H7", [x for x in range(7, 13)])
+family5 = {H1, H2, H3, H4, H5, H6, H7}
+instance5 = SCP.SetCover(finite_set_5, family5)
+
+if __name__ == "__main__":
+    print("Ejemplar 1: ")
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print(instance1)
+    print("Solución dada por el algoritmo para el ejemplar anterior: ")
+    sol1 = instance1.greedy_set_cover()
+    print(sol1)
+    print("Costo de la solución:")
+    print(instance1.cost_of_instance(sol1))
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("Ejemplar 2: ")
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print(instance2)
+    print("Solución dada por el algoritmo para el ejemplar anterior: ")
+    sol2 = instance2.greedy_set_cover()
+    print(sol2)
+    print("Costo de la solución:")
+    print(instance2.cost_of_instance(sol2))
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("Ejemplar 3: ")
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print(instance3)
+    print("Solución dada por el algoritmo para el ejemplar anterior: ")
+    sol3 = instance3.greedy_set_cover()
+    print(sol3)
+    print("Costo de la solución:")
+    print(instance3.cost_of_instance(sol3))
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("Ejemplar 4: ")
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print(instance4)
+    print("Solución dada por el algoritmo para el ejemplar anterior: ")
+    sol4 = instance4.greedy_set_cover()
+    print(sol4)
+    print("Costo de la solución:")
+    print(instance4.cost_of_instance(sol4))
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("Ejemplar 5: ")
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print(instance5)
+    print("Solución dada por el algoritmo para el ejemplar anterior: ")
+    sol5 = instance5.greedy_set_cover()
+    print(sol5)
+    print("Costo de la solución:")
+    print(instance5.cost_of_instance(sol5))
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")

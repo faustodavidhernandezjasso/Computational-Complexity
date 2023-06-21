@@ -1,0 +1,168 @@
+% natbib guide (https://gking.harvard.edu/files/natnotes2.pdf)
+% \citet     #textual citations, print the abbreviated author list
+% \citet*    #textual citations, print the full author list
+% \citep     #parenthetical citations, print the abbreviated author list
+% \citep*    #parenthetical citations, print the full author list
+% \citealt    #the same as \citet but without any parentheses.
+% \citealp    #the same as \citep but without any parentheses. 
+% \citeauthor{ale91}         #Alex et al.
+% \citeauthor*{ale91}        #Alex, Mathew, and Ravi
+% \citeyear{ale91}           #1991 
+% \citeyearpar{ale91}        #(1991)
+
+\documentclass[spanish, xcolor=dvipsnames, aspectratio=169]{beamer}
+
+% Text encoding
+\usepackage[spanish]{babel}
+\usepackage[draft]{pdfcomment}
+\newcommand{\pdfnote}[1]{\marginnote{\pdfcomment[icon=note]{#1}}}
+% Justify text (package and function)
+% \apptocmd{command}{code}{success}{failure}
+\usepackage{ragged2e}
+\apptocmd{\frame}{}{\justifying}{} 
+% Justify text in \item
+\newcommand{\itemj}{\item \justifying}
+
+% If...else package
+\usepackage{ifthen}
+
+% Package to set transparent background image
+\usepackage{tikz}
+
+% Include image package
+\usepackage{graphicx}
+% Set default path for images
+\graphicspath{ {./imgs/} }
+% Set figure number when included
+\setbeamertemplate{caption}[numbered]
+
+% Bibliography packages
+\usepackage[sort, round]{natbib}
+\bibliographystyle{plainnat}
+
+% Define colors variables
+\definecolor{red}{rgb}{0.631, 0.094, 0.094} % primary color
+\definecolor{grey}{rgb}{0.3686, 0.5255, 0.6235} % secondary color
+
+% Set theme palette colors
+\setbeamercolor{palette primary}{bg=red,fg=white}
+\setbeamercolor{palette secondary}{bg=red,fg=white}
+\setbeamercolor{palette tertiary}{bg=red,fg=white}
+\setbeamercolor{palette quaternary}{bg=red,fg=white}
+% strucure means itemize, enumerate, etc
+\setbeamercolor{structure}{fg=red} 
+
+% Set bibliography colors
+\setbeamercolor{bibliography item}{fg=red}
+\setbeamercolor{bibliography entry author}{fg=black}
+\setbeamercolor{bibliography entry title}{fg=black}
+\setbeamercolor{bibliography entry location}{fg=black}
+\setbeamercolor{bibliography entry note}{fg=black}
+% Replaces book icon in bibliography with enumeration
+\setbeamertemplate{bibliography item}{[\theenumiv]}
+
+% Table of contents style
+% \setbeamertemplate{section in toc}[sections numbered]
+% \setbeamertemplate{subsection in toc}[subsections numbered]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[ball unnumbered]
+
+% Header with navigation bar
+\setbeamertemplate{headline}
+{
+    \leavevmode
+    \hbox{
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex]{palette quaternary}
+    \insertsectionnavigationhorizontal{\paperwidth}{}{\hskip0pt plus1filll}
+    \end{beamercolorbox} 
+    }
+}
+% Footer with custom caption
+\setbeamertemplate{footline}
+{
+    \leavevmode
+    \hbox{
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.6ex,dp=1ex,center]{palette quaternary}
+    \usebeamerfont{author in head/foot}\insertshortauthor\hspace*{1ex}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.6ex,dp=1ex,center]{palette quaternary}
+    \usebeamerfont{institute in head/foot}\insertshortinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.6ex,dp=1ex,center]{palette quaternary}
+    \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}}
+    \vskip0pt
+}
+
+% Global Background must be put in preamble
+\usebackgroundtemplate
+{
+    \tikz\node[opacity=0.3]{\includegraphics[height=\paperheight, width=\paperwidth]{white_background.jpg}};
+}
+
+% One line command to print table of contents - two parameters for modes
+\newcommand{\customToC}[2]
+{
+    \begin{frame}{Contenido}
+    \tableofcontents[#1, #2]
+    \end{frame}
+}
+
+% Command to plot centered figure
+% Parameters: #1=image name, #2=caption 
+\newcommand{\includefigure}[2]
+{
+    \begin{figure}[h]
+    \caption{#2}
+    \centering
+    \includegraphics[width=0.5\textwidth]{#1}
+    \end{figure}
+}
+
+% Command to set section name as variable (\renewcommand to update)
+\newcommand{\sectiontitle}{}
+% Command to set subsection name as variable (\renewcommand to update)
+\newcommand{\subsectiontitle}{}
+
+
+% Title page
+\title{Minimum Makespan Scheduling and Scheduling on Identical Machines}
+\subtitle{Algoritmos de aproximación, PTAS y FPTAS}
+\author{Rodrigo Arévalo Gaytán \and Fausto David Hernández Jasso}
+\institute{Universidad Nacional Autónoma de México}
+% Date
+\day=01\relax
+\month=10\relax
+\year=2022\relax
+
+\begin{document}
+
+\frame{\titlepage}
+
+% Complete table of contents (ToC)
+% \customToC{hideallsubsections}{}
+\customToC{hideothersubsections}{}
+
+
+%%%%%%%%%%%%%%%%% PARTE FAUSTO %%%%%%%%%%%%%%%%%%%%%%%
+\input{minimum_makespan_scheduling}
+
+
+%%%%%%%%%%%%%%%%%% PARTE RAG %%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{mmsPTAS.tex}
+
+%%%%%%%%%%%%%%% FIN PARTE RAG %%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t, allowframebreaks]
+\frametitle{Referencias}
+\begin{thebibliography}{10}
+\bibitem{vazirani2011}
+\alert{Vazirani, V. V.}
+\newblock  {Approximation Algorithms}
+\newblock {\em Springer. Berlin (2003), 79-83, 139-144}.
+
+
+\end{thebibliography}
+\end{frame}
+
+\end{document}

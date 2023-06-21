@@ -1,0 +1,38 @@
+\renewcommand{\sectiontitle}{Conceptos previos}
+\section{\sectiontitle}
+\customToC{currentsection,hideothersubsections}{}
+
+\renewcommand{\subsectiontitle}{Algoritmo de aproximación}
+\subsection{\subsectiontitle}
+\begin{frame}{\subsectiontitle}
+    \begin{itemize}
+        \item Sea \(C_{opt}\) lo que tarda el \textbf{algoritmo óptimo} en encontrar una solución para un problema
+        de tamaño \(n\), entonces un \textbf{algoritmo de aproximación} para éste problema tiene una aproximación 
+        con proporción dada por \(\varrho\left(n\right)\) sí para cada entrada un algoritmo 
+        \textit{(que no es el óptimo)} produce una solución para el problema en tiempo \(C\) tal que:
+        \[
+            \mathbf{max}\left(\frac{C}{C_{opt}}, \frac{C_{opt}}{C}\right)  
+        \]
+        tal que el último algoritmo es llamado \textbf{algoritmo} \(\varrho\left(n\right)\) \textbf{aproximado}.
+    \end{itemize}
+\end{frame}
+\renewcommand{\subsectiontitle}{PTAS (Polynomial Time Approximation Scheme)}
+\subsection{\subsectiontitle}
+\begin{frame}{\subsectiontitle}
+    \begin{itemize}
+        \item Un \textbf{esquema de aproximación} para un problema de optimización es un conjunto de algoritmos tales que dada 
+        una \(\varepsilon > 0\), éste conjunto conjunto contienen \((1 + \varepsilon)\) algoritmos de aproximación 
+        \textit{(si es que el problema es de minimización)} y contienen \((1 - \varepsilon)\) algoritmos de aproximación 
+        \textit{(si es que el problema es de maximiación)} tal que éstos algoritmos de aproximación son ejecutados en 
+        tiempo polinomial en \(n\) cuando \(\varepsilon\) está fijo.
+    \end{itemize}
+\end{frame}
+\renewcommand{\subsectiontitle}{FPTAS (Fully Polynomial Time Approximation Scheme)}
+\subsection{\subsectiontitle}
+\begin{frame}{\subsectiontitle}
+    \begin{itemize}
+        \item Un \textbf{esquema de aproximación completo} para un problema de optimización que minimiza es n conjunto de algoritmos
+        tales que dada una \(\varepsilon > 0\), contiene \((1 + \varepsilon)\) algoritmos de aproximación 
+        tal que éstos algoritmos de aproximación son ejecutados en tiempo polinomial tanto en \(n\) como en \(\frac{1}{\varepsilon}\).
+    \end{itemize}
+\end{frame}
